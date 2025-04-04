@@ -142,8 +142,13 @@ function view_mail(email_id){
 
           // Prefill composition fields
           const recipients = emails.sender;
-          const subject = `Re: ${emails.subject}`;
+          let subject = emails.subject;
           const body = `On ${emails.timestamp}, ${emails.sender} wrote: ${emails.body}`;
+
+          // checking if the subject starts with RE:
+          if (!subject.startsWith("Re: ")){
+            subject = `Re: ${emails.subject}`;
+          }
           document.querySelector('#compose-recipients').value = recipients;
           document.querySelector('#compose-subject').value = subject;
           document.querySelector('#compose-body').value = body;
